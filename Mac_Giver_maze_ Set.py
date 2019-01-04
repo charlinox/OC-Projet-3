@@ -5,7 +5,7 @@ from Constantes.py import *
 class Niveau:
 		
     def __init__(self, fichier):
-		self.fichier = fichier
+		self.fichier = FICHIER
 		self.couloirs = {}
 		        
     def lire_fichier(self, fichier):
