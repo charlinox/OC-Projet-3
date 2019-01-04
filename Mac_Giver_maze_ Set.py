@@ -25,8 +25,8 @@ class Outils:
     
     def placerObjets(self, niveau):
         """ Création d'un set contenant les coordoonées des trois outils à ramasser. """
-        couloirsDispo = niveau.couloirs # Copie pour manipulation #
-        self.emplacement_outils = set(random.sample(couloirsDispo - {POS_DEPART, POS_ARRIVEE}, 3))
+        couloirs = niveau.couloirs # Copie pour manipulation #
+        self.emplacement_outils = set(random.sample(couloirs - {POS_DEPART, POS_ARRIVEE}, 3))
         
 				
 		
