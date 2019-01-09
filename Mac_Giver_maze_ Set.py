@@ -15,14 +15,32 @@ class Niveau:
             data = json.load(f)
             self.couloirs = set(data)    
     
-    def afficher(self):
+    def afficher(self, couloirs):
+        maze = ""
+        for index_col in range(15):
+            for index_line in range(15):
+                if index_line, index_col in couloirs:
+                    if index_line, index_col in Outils.emplacement_outils:
+                        maze += "O" # affichage de trois outils génériques #
+                    elif index_line, index_col in set(Personnage.posX, Personnage.posY):
+                        maze += "P" # affichage du personnage #
+                    else:
+                        maze += " " # affichage d'un couloir vide #
+                else:
+                    maze += "X" # affichage d'un mur #
+            ligne_maze += "/n"
+        
+        print (ligne_maze)
+            
+            
 
-class Outils:
+class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les coordoonées des trois objets. """
     def __init__(self):
         self.emplacement_outils = None
-    
-    def placerObjets(self, niveau):
+        self.posX_garde, self.posY_garde = POS_ARRIVEE
+        
+    def placer(self, niveau):
         """ Création d'un set contenant les coordoonées des trois outils à ramasser. """
         couloirs = niveau.couloirs # Copie pour manipulation #
         self.emplacement_outils = set(random.sample(couloirs - {POS_DEPART, POS_ARRIVEE}, 3))
@@ -31,16 +49,45 @@ class Personnage:
     
     def __init__(self):
         self.compteurObjets = 0
-        self.posX, self.posY = posDepart
+        self.posX, self.posY = POS_DEPART        
         
     def deplacer(self, deplacement):
         actions = {
             "d": lambda: (pos_x + 1, pos_y),
-            "g": lambda: (pos_x - 1, pos_y),
-            "h": lambda: (pos_x, pos_y - 1),
-            "b": lambda: (pos_x, pos_y + 1),
+            "q": lambda: (pos_x - 1, pos_y),
+            "z": lambda: (pos_x, pos_y - 1),
+            "s": lambda: (pos_x, pos_y + 1),
+            "p": lambda: (continuer = 0) # pas de virgule ici non ? #
         }
-        
+        pos_x, pos_y = actions[deplacement]() # C'est quand même étrange cette construction avec les parenthèses aprés les crochets. Tu pourras m'expliquer ? #
+        return (pos_x , pos_y) # On fait bien comme ca ? #
+    
     def ramasser(self):
         
-deplacement = input("Veuillez entrer une lettre pour déplacer Mac Gyver (D, G, H, B) :")
+        
+def main():
+    
+    mac_gyver = Personnage()
+    niveau1 = Niveau()
+    elements_fixes = ElementsFixes()
+    
+    elements_fixes.placer(niveau1)
+    
+    #BOUCLE PRINCIPALE
+    continuer = 1 # et pourquoi pas plutot "true" ? #
+    while continuer:
+        deplacement = lower(input("Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s) ou 'p' pour sortir :"))
+        
+        pos_actuelle = mac_gyver.deplacer(deplacement)
+        
+        if pos_actuelle in elements_fixes.emplacement_outils:
+            mac_gyver.compteurObjets +=
+            # comment on enlève un élément d'un set ? En créant une liste pour le transformer puis en le retransformant en set à nouveau ? #
+        if pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets == 3:
+            continuer = 0
+        
+            
+        
+        
+        
+        
