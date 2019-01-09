@@ -15,7 +15,6 @@ class Niveau:
             data = json.load(f)
             self.couloirs = set(data)    
     
-        
     def afficher(self):
 
 class Outils:
@@ -28,8 +27,6 @@ class Outils:
         couloirs = niveau.couloirs # Copie pour manipulation #
         self.emplacement_outils = set(random.sample(couloirs - {POS_DEPART, POS_ARRIVEE}, 3))
         
-				
-		
 class Personnage:
     
     def __init__(self):
@@ -43,8 +40,6 @@ class Personnage:
             "h": lambda: (pos_x, pos_y - 1),
             "b": lambda: (pos_x, pos_y + 1),
         }
-        
-        
         
     def ramasser(self):
         
