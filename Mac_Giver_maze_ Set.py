@@ -5,7 +5,7 @@ from Constantes.py import *
 class Niveau:
 		
     def __init__(self, fichier):
-		self.fichier = FICHIER
+		self.fichier = FICHIER_NIVEAU1
 		self.couloirs = {}
 		        
     def lire_fichier(self, fichier):
@@ -22,7 +22,7 @@ class Niveau:
                 if index_line, index_col in couloirs:
                     if index_line, index_col in Outils.emplacement_outils:
                         maze += "O" # affichage de trois outils génériques #
-                    elif index_line, index_col in set(Personnage.posX, Personnage.posY):
+                    elif index_line, index_col in set(self.posX, self.posY):
                         maze += "P" # affichage du personnage #
                     else:
                         maze += " " # affichage d'un couloir vide #
@@ -38,11 +38,11 @@ class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les coordoonées des trois objets. """
     def __init__(self):
         self.emplacement_outils = None
-        self.posX_garde, self.posY_garde = POS_ARRIVEE
+        # "self.posX_garde, self.posY_garde = POS_ARRIVEE" sans interet finalement # 
         
     def placer(self, niveau):
         """ Création d'un set contenant les coordoonées des trois outils à ramasser. """
-        couloirs = niveau.couloirs # Copie pour manipulation #
+        couloirs = niveau #.couloirs  ? # Copie pour manipulation.  #
         self.emplacement_outils = set(random.sample(couloirs - {POS_DEPART, POS_ARRIVEE}, 3))
         
 class Personnage:
@@ -71,7 +71,9 @@ def main():
     niveau1 = Niveau()
     elements_fixes = ElementsFixes()
     
-    elements_fixes.placer(niveau1)
+    niveau1.lire_fichier(FICHIER_NIVEAU1)
+    elements_fixes.placer(niveau1.couloirs)
+    niveau1.afficher(niveau1.couloirs)
     
     #BOUCLE PRINCIPALE
     continuer = 1 # et pourquoi pas plutot "true" ? #
@@ -82,9 +84,12 @@ def main():
         
         if pos_actuelle in elements_fixes.emplacement_outils:
             mac_gyver.compteurObjets +=
-            # comment on enlève un élément d'un set ? En créant une liste pour le transformer puis en le retransformant en set à nouveau ? #
+            # comment on enlève un élément d'un set ? En créant une liste pour le supprimer puis en le retransformant la liste en set à nouveau ? #
         if pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets == 3:
             continuer = 0
+        elif pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets < 3:
+            print("Vous êtes mort !")
+        
         
             
         
