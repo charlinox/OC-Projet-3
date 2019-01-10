@@ -38,17 +38,23 @@ class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les coordoonées des trois objets. """
     def __init__(self):
         self.emplacement_outils = None
-        # "self.posX_garde, self.posY_garde = POS_ARRIVEE" sans interet finalement # 
+        # "self.posX_garde, self.posY_garde = POS_ARRIVEE" sans interet finalement #
+        self.compteurObjets = 0
         
     def placer(self, niveau):
         """ Création d'un set contenant les coordoonées des trois outils à ramasser. """
         couloirs = niveau #.couloirs  ? # Copie pour manipulation.  #
         self.emplacement_outils = set(random.sample(couloirs - {POS_DEPART, POS_ARRIVEE}, 3))
         
+    def ramasser(self, pos_actuelle):
+        if pos_actuelle in self.emplacement_outils:
+            self.compteurObjets +=
+            self.emplacement_outils -= pos_actuelle
+            
+        
 class Personnage:
     
     def __init__(self):
-        self.compteurObjets = 0
         self.posX, self.posY = POS_DEPART        
         
     def deplacer(self, deplacement):
@@ -60,11 +66,16 @@ class Personnage:
             "p": lambda: (continuer = 0) # pas de virgule ici non ? #
         }
         pos_x, pos_y = actions[deplacement]() # C'est quand même étrange cette construction avec les parenthèses aprés les crochets. Tu pourras m'expliquer ? #
-        return (pos_x , pos_y) # On fait bien comme ca ? #
+         """ Est ce que ca serait pas mieux de définir pos_actuelle = pos_x, pos_y comme une "variable globale" et de la renvoyer ? """ 
+        return (pos_x , pos_y) 
     
-    def ramasser(self):
-        
-        
+    def combat(self, pos_actuelle):
+        if pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets == 3:
+            print("Vous avez tué le gardien. Vous êtes libre.")
+        elif pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets < 3:
+            print("Vous êtes mort !")
+        continuer = 0
+    return (continuer)
         
 def main():
     
@@ -82,20 +93,13 @@ def main():
         
         deplacement = lower(input("Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s) ou 'p' pour sortir :"))
         
-        pos_actuelle = mac_gyver.deplacer(deplacement)
+        pos_actuelle = mac_gyver.deplacer(deplacement)       
+        elements_fixes.ramasser(pos_actuelle)
+        mac_gyver.combat(pos_actuelle)
         
-        if pos_actuelle in elements_fixes.emplacement_outils:
-            mac_gyver.compteurObjets +=
-            # comment on enlève un élément d'un set ? En créant une liste pour le supprimer puis en le retransformant la liste en set à nouveau ? #
-        
-        if pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets == 3:
-            continuer = 0
-        elif pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets < 3:
-            print("Vous êtes mort !")
-               
         niveau1.afficher(niveau1.couloirs)
         
-    Print("Vous avez tué le gardien. Vous êtes libre.")
+    
         
             
         
