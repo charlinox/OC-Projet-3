@@ -28,9 +28,9 @@ class Niveau:
                         maze += " " # affichage d'un couloir vide #
                 else:
                     maze += "X" # affichage d'un mur #
-            ligne_maze += "/n"
+            maze += "/n"
         
-        print (ligne_maze)
+        print (maze)
             
             
 
@@ -65,6 +65,7 @@ class Personnage:
     def ramasser(self):
         
         
+        
 def main():
     
     mac_gyver = Personnage()
@@ -78,6 +79,7 @@ def main():
     #BOUCLE PRINCIPALE
     continuer = 1 # et pourquoi pas plutot "true" ? #
     while continuer:
+        
         deplacement = lower(input("Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s) ou 'p' pour sortir :"))
         
         pos_actuelle = mac_gyver.deplacer(deplacement)
@@ -85,11 +87,15 @@ def main():
         if pos_actuelle in elements_fixes.emplacement_outils:
             mac_gyver.compteurObjets +=
             # comment on enlève un élément d'un set ? En créant une liste pour le supprimer puis en le retransformant la liste en set à nouveau ? #
+        
         if pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets == 3:
             continuer = 0
         elif pos_actuelle == POS_ARRIVEE and mac_gyver.compteurObjets < 3:
             print("Vous êtes mort !")
+               
+        niveau1.afficher(niveau1.couloirs)
         
+    Print("Vous avez tué le gardien. Vous êtes libre.")
         
             
         
