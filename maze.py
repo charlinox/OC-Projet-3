@@ -1,9 +1,8 @@
-import json
 import random
 #from Constantes.py import *
 #import Constantes.py
 
-FICHIER_NIVEAU1 = "Level_1_List.json"
+FICHIER_NIVEAU1 = "level_1"
 
 POS_DEPART = (0, 0)
 POS_ARRIVEE = (15, 15)
@@ -21,6 +20,16 @@ class Niveau:
         """Méthode permettant de lire le fichier en créant un set contenant les tuples des coordonnées des espaces vides (les couloirs)"""
         with open(fichier) as f:
             data = json.load(f)
+            
+            ligne, colonne = 0, 0
+            couloirs = {}
+            for case in data:
+                if case == "0":
+                    couloir.append(ligne, colonne)
+                    ligne +=
+                elif case == '\n':
+                    colonne +=
+                    
             self.couloirs = set(data)    
     
     def afficher(self, couloirs, outils):
@@ -98,7 +107,7 @@ class Personnage:
     
 def main():
     
-    niveau1 = Niveau("Level_1_List.json")
+    niveau1 = Niveau("level_1")
     mac_gyver = Personnage(niveau1)
     elements_fixes = ElementsFixes()
     
