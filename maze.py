@@ -50,7 +50,7 @@ class Niveau:
         return  position in self._couloirs
     
     @property
-    def _depart(self):
+    def obtenir_pos_depart(self):
         return list(self._depart)[0]
     
 
