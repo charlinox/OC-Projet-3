@@ -1,19 +1,15 @@
+#!/usr/bin/python3
+# -*- coding: Utf-8 -*
+
 import random
-#from Constantes.py import *
-#import Constantes.py
-
-FICHIER_NIVEAU1 = "level_1"
-
-POS_DEPART = (0, 0)
-POS_ARRIVEE = (15, 15)
 
 class Niveau:
 		
     def __init__(self, fichier): # Pas besoin du paramètre "fichier" ? #
         self.fichier = fichier # du coup j'au intégrer le paramètre.
-        self.couloirs = {}
-        self.depart = {}
-        self.arrivee = {}
+        self.couloirs = set()
+        self.depart = set()
+        self.arrivee = set()
         self.personnage = Personnage(self) 
         self.outils = ElementsFixes()
         #self.outils.placer()
@@ -53,6 +49,9 @@ class Niveau:
     def est_permis(self, position):
         return  position in self._couloirs
     
+    def depart(self):
+        return (self.depart)
+    
 
 class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les coordoonées des trois objets. """
@@ -74,9 +73,9 @@ class ElementsFixes:
 class Personnage:
     
     def __init__(self, niveau):
-        self.posX, self.posY = POS_DEPART  
-        self.niveau = niveau      
-        
+        self.niveau = niveau
+        self.posX, self.posY = self.niveau.depart()
+
     def deplacer(self, deplacement):
         actions = {
             "d": lambda: (pos_x + 1, pos_y),
@@ -111,7 +110,7 @@ def main():
     mac_gyver = Personnage(niveau1)
     elements_fixes = ElementsFixes()
     
-    niveau1.lire_fichier(FICHIER_NIVEAU1)
+    niveau1.lire_fichier("level_1")
     elements_fixes.placer(niveau1.couloirs)
     niveau1.afficher(niveau1.couloirs)
     
