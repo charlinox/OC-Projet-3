@@ -8,7 +8,7 @@ class Niveau:
     def __init__(self, fichier): # Pas besoin du paramètre "fichier" ? #
         self.fichier = fichier # du coup j'au intégrer le paramètre.
         self.couloirs = set()
-        self.depart = set()
+        self._depart = set()
         self.arrivee = set()
         self.personnage = Personnage(self) 
         self.outils = ElementsFixes()
@@ -23,7 +23,7 @@ class Niveau:
                     if col == '0':
                         self.couloirs.add((i, j))
                     elif col == 'd':
-                        self.depart.add((i,j))
+                        self._depart.add((i,j))
                     elif col == 'a':
                         self.arrivee.add((i, j))
 
@@ -49,8 +49,9 @@ class Niveau:
     def est_permis(self, position):
         return  position in self._couloirs
     
-    def depart(self):
-        return (self.depart)
+    @property
+    def _depart(self):
+        return list(self._depart)[0]
     
 
 class ElementsFixes:
@@ -74,7 +75,7 @@ class Personnage:
     
     def __init__(self, niveau):
         self.niveau = niveau
-        self.posX, self.posY = self.niveau.depart()
+        self.posX, self.posY = self.niveau.obtenir_pos_depart()
 
     def deplacer(self, deplacement):
         actions = {
