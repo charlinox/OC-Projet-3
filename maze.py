@@ -12,6 +12,8 @@ class Niveau:
     def __init__(self, fichier): # Pas besoin du paramètre "fichier" ? #
         self.fichier = fichier # du coup j'au intégrer le paramètre.
         self.couloirs = {}
+        self.depart = {}
+        self.arrivee = {}
         self.personnage = Personnage(self) 
         self.outils = ElementsFixes()
         #self.outils.placer()
@@ -19,18 +21,16 @@ class Niveau:
     def lire_fichier(self, fichier):
         """Méthode permettant de lire le fichier en créant un set contenant les tuples des coordonnées des espaces vides (les couloirs)"""
         with open(fichier) as f:
-            data = json.load(f)
-            
-            ligne, colonne = 0, 0
-            couloirs = {}
-            for case in data:
-                if case == "0":
-                    couloir.append(ligne, colonne)
-                    ligne +=
-                elif case == '\n':
-                    colonne +=
-                    
-            self.couloirs = set(data)    
+
+            for i, ligne in enumerate(f):
+                for j, col in enumerate(ligne):
+                    if col == '0':
+                        self.couloirs.add((i, j))
+                    elif col == 'd':
+                        self.depart.add((i,j))
+                    elif col == 'a':
+                        self.arrivee.add((i, j))
+
     
     def afficher(self, couloirs, outils):
         maze = ""
