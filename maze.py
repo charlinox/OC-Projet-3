@@ -34,9 +34,9 @@ class Niveau:
             for index_line in range(15):
                 if (index_line, index_col) in self.couloirs:
                     # print (self._outils.emplacement_outils)
-                    if (index_line, index_col) in self._outils.emplacement_outils:
+                    if (index_line, index_col) in self.outils.emplacement_outils:
                         maze += "O" # affichage de trois outils génériques #
-                    elif (index_line, index_col) == self._personnage.obtenir_position():
+                    elif (index_line, index_col) == self.personnage.obtenir_position():
                         maze += "P" # affichage du personnage #
                     else:
                         maze += " " # affichage d'un couloir vide #
@@ -50,7 +50,7 @@ class Niveau:
         return  position in self._couloirs
     
     @property
-    def obtenir_pos_depart(self):
+    def pos_depart(self):
         return list(self._depart)[0]
     
 
@@ -75,7 +75,7 @@ class Personnage:
     
     def __init__(self, niveau):
         self.niveau = niveau
-        self.posX, self.posY = self.niveau.obtenir_pos_depart()
+        self.posX, self.posY = self.niveau.pos_depart
 
     def deplacer(self, deplacement):
         actions = {
@@ -108,8 +108,8 @@ class Personnage:
 def main():
     
     niveau1 = Niveau("level_1")
-    mac_gyver = Personnage(niveau1)
-    elements_fixes = ElementsFixes()
+    mac_gyver = niveau1.personnage
+    elements_fixes = niveau1.outils
     
     niveau1.lire_fichier("level_1")
     elements_fixes.placer(niveau1.couloirs)
