@@ -11,7 +11,7 @@ class Niveau:
         self._depart = set()
         self.arrivee = set()
         self.personnage = Personnage(self) 
-        self.outils = ElementsFixes()
+        self.outils = ElementsFixes(self)
         #self.outils.placer()
 		        
     def lire_fichier(self, fichier):
@@ -51,7 +51,8 @@ class Niveau:
     
     @property
     def pos_depart(self):
-        return list(self._depart)[0]
+        print (self._depart)
+        return list(self._depart)
     
 
 class ElementsFixes:
