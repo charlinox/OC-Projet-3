@@ -25,7 +25,7 @@ class Niveau:
                     if col == '0':
                         self.couloirs.add((i, j))
                     elif col == 'd':
-                        self.depart.add((i,j)) # -cc- j'ai enlevé le "_"
+                        self.depart.add((i,j))
                         self.couloirs.add((i, j))
                     elif col == 'a':
                         self.arrivee.add((i, j))
@@ -37,10 +37,8 @@ class Niveau:
         for index_line in range(15):
             for index_col in range(15):
                 if (index_line, index_col) in self.couloirs:
-                    # print (self._outils.emplacement_outils)
                     if (index_line, index_col) == self.personnage.obtenir_position():
                         maze += "P" # affichage du personnage #
-                        
                     elif (index_line, index_col) in self.outils.emplacement_outils:
                         maze += "O" # affichage de trois outils génériques #
                     elif (index_line, index_col) == self.pos_arrivee:
@@ -58,12 +56,10 @@ class Niveau:
     
     @property
     def pos_depart(self):
-        print (self.depart) # -cc- j'ai enlevé le "_"
         return list(self.depart)[0]
     
     @property
     def pos_arrivee(self):
-        print (self.arrivee)
         return list(self.arrivee)[0]
 
 class ElementsFixes:
@@ -75,7 +71,7 @@ class ElementsFixes:
         
     def placer(self, niveau):
         """ Création d'un set contenant les coordoonées des trois outils à ramasser. """
-        couloirs = niveau #.couloirs  ? # Copie pour manipulation.  #
+        couloirs = niveau # Copie pour manipulation
         self.emplacement_outils = set(
             random.sample(
                 niveau.couloirs - {niveau.pos_depart, niveau.pos_arrivee}, 
@@ -85,8 +81,8 @@ class ElementsFixes:
         
     def ramasser(self, pos_actuelle):
         if pos_actuelle in self.emplacement_outils:
-            # self.compteurObjets +=
             self.emplacement_outils -= pos_actuelle()
+            self.niveau.outils.compteurObjets +=
             
             
 class Personnage:
@@ -97,10 +93,10 @@ class Personnage:
 
     def deplacer(self, deplacement):
         actions = {
-            "d": lambda: (self.pos_x + 1, self.pos_y),
-            "q": lambda: (self.pos_x - 1, self.pos_y),
-            "z": lambda: (self.pos_x, self.pos_y - 1),
-            "s": lambda: (self.pos_x, self.pos_y + 1),
+            "d": lambda: (self.pos_x, self.pos_y+1),
+            "q": lambda: (self.pos_x, self.pos_y-1),
+            "z": lambda: (self.pos_x-1, self.pos_y),
+            "s": lambda: (self.pos_x+1, self.pos_y),
         }
         pos_x, pos_y = actions[deplacement]()
         
@@ -113,22 +109,21 @@ class Personnage:
         
     
     def combat(self, pos_actuelle):
-        if pos_actuelle == self.niveau.pos_arrivee and self.niveau.outils.compteurObjets == 3:
-            print("Vous avez tué le gardien. Vous êtes libre.")
-            return False
-        elif pos_actuelle == self.niveau.pos_arrivee and self.niveau.outils.compteurObjets < 3:
-            print("Vous êtes mort !")
-            return False
-        return True
+        if pos_actuelle == self.niveau.pos_arrivee:
+            if self.niveau.outils.compteurObjets == 3:
+                print("Vous avez tué le gardien. Vous êtes libre.")
+                return False
+            if self.niveau.outils.compteurObjets < 3:
+                print("Vous êtes mort !")
+                return False
+            return True
 
     def obtenir_position(self):
-        # print(self.pos_x, self.pos_y)
         return self.pos_x, self.pos_y
     
 def main():
     
     niveau1 = Niveau("level_2")
-    #elements_fixes.placer(niveau1)
     niveau1.outils.placer(niveau1)
     niveau1.afficher()
     
@@ -137,7 +132,7 @@ def main():
     while continuer:
         
         deplacement = input(
-            "Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s) : "
+            "Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s et p pour sortir) : "
         ).lower()
         if deplacement in list("dqzs"):
             
