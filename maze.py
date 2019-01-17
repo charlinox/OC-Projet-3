@@ -8,7 +8,7 @@ class Niveau:
     def __init__(self, fichier):
         self.fichier = fichier
         self.couloirs = set()
-        self._depart = set()
+        self.depart = set() # -cc- j'ai enlevé le "_"
         self.arrivee = set()
         self.lire_fichier()
         self.personnage = Personnage(self) 
@@ -16,7 +16,8 @@ class Niveau:
         
 		        
     def lire_fichier(self):
-        """Méthode permettant de lire le fichier en créant un set contenant les tuples des coordonnées des espaces vides (les couloirs)"""
+        """Méthode permettant de lire le fichier en créant un set contenant les tuples 
+        des coordonnées des espaces vides (les couloirs)"""
         with open(self.fichier) as f:
 
             for i, ligne in enumerate(f):
@@ -24,7 +25,7 @@ class Niveau:
                     if col == '0':
                         self.couloirs.add((i, j))
                     elif col == 'd':
-                        self._depart.add((i,j))
+                        self.depart.add((i,j)) # -cc- j'ai enlevé le "_"
                     elif col == 'a':
                         self.arrivee.add((i, j))
 
@@ -52,8 +53,8 @@ class Niveau:
     
     @property
     def pos_depart(self):
-        print (self._depart)
-        return list(self._depart)[0]
+        print (self.depart) # -cc- j'ai enlevé le "_"
+        return list(self.depart)[0]
     
     @property
     def pos_arrivee(self):
@@ -61,7 +62,8 @@ class Niveau:
         return list(self.arrivee)[0]
 
 class ElementsFixes:
-    """ Gestion des outils représenté par un set de trois tuples contenant les coordoonées des trois objets. """
+    """ Gestion des outils représenté par un set de trois tuples contenant les 
+    coordoonées des trois objets. """
     def __init__(self):
         self.emplacement_outils = None
         self.compteurObjets = 0
@@ -97,6 +99,7 @@ class Personnage:
             #"p": lambda: (continuer = 0)
         }
         pos_x, pos_y = actions[deplacement]() # C'est quand même étrange cette construction avec les parenthèses aprés les crochets. Tu pourras m'expliquer ? #
+        
         if self.niveau.est_permis(self.posX, self.posY):
             self.posX, self.posY = pos_x, pos_y
             return (self.posX, self.posY)
@@ -114,12 +117,14 @@ class Personnage:
         return (continuer)
 
     def obtenir_position(self):
+        # print(self.posX, self.posY)
         return self.posX, self.posY
     
 def main():
     
     niveau1 = Niveau("level_1")
-    elements_fixes.placer(niveau1)
+    #elements_fixes.placer(niveau1)
+    niveau1.outils.placer(niveau1)
     niveau1.afficher()
     
     #BOUCLE PRINCIPALE
@@ -131,7 +136,7 @@ def main():
             "ou 'p' pour sortir : "
         ).lower()
         
-        pos_actuelle = mac_gyver.deplacer(deplacement)       
+        pos_actuelle = niveau1.personnage.deplacer(deplacement)       
         elements_fixes.ramasser(pos_actuelle)
         mac_gyver.combat(pos_actuelle)
         
