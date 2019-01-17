@@ -26,8 +26,10 @@ class Niveau:
                         self.couloirs.add((i, j))
                     elif col == 'd':
                         self.depart.add((i,j)) # -cc- j'ai enlevé le "_"
+                        self.couloirs.add((i, j))
                     elif col == 'a':
                         self.arrivee.add((i, j))
+                        self.couloirs.add((i, j))
 
     
     def afficher(self):
@@ -38,8 +40,11 @@ class Niveau:
                     # print (self._outils.emplacement_outils)
                     if (index_line, index_col) == self.personnage.obtenir_position():
                         maze += "P" # affichage du personnage #
+                        
                     elif (index_line, index_col) in self.outils.emplacement_outils:
                         maze += "O" # affichage de trois outils génériques #
+                    elif (index_line, index_col) == self.pos_arrivee:
+                        maze += "G" # affichage du gardien #
                     else:
                         maze += " " # affichage d'un couloir vide #
                 else:
@@ -49,7 +54,7 @@ class Niveau:
         print(maze)
 
     def est_permis(self, position):
-        return  position in self._couloirs
+        return  position in self.couloirs
     
     @property
     def pos_depart(self):
@@ -88,58 +93,61 @@ class Personnage:
     
     def __init__(self, niveau):
         self.niveau = niveau
-        self.posX, self.posY = self.niveau.pos_depart
+        self.pos_x, self.pos_y = self.niveau.pos_depart
 
     def deplacer(self, deplacement):
         actions = {
-            "d": lambda: (pos_x + 1, pos_y),
-            "q": lambda: (pos_x - 1, pos_y),
-            "z": lambda: (pos_x, pos_y - 1),
-            "s": lambda: (pos_x, pos_y + 1),
-            #"p": lambda: (continuer = 0)
+            "d": lambda: (self.pos_x + 1, self.pos_y),
+            "q": lambda: (self.pos_x - 1, self.pos_y),
+            "z": lambda: (self.pos_x, self.pos_y - 1),
+            "s": lambda: (self.pos_x, self.pos_y + 1),
         }
-        pos_x, pos_y = actions[deplacement]() # C'est quand même étrange cette construction avec les parenthèses aprés les crochets. Tu pourras m'expliquer ? #
+        pos_x, pos_y = actions[deplacement]()
         
-        if self.niveau.est_permis(self.posX, self.posY):
-            self.posX, self.posY = pos_x, pos_y
-            return (self.posX, self.posY)
+        if self.niveau.est_permis((pos_x, pos_y)):
+            self.pos_x, self.pos_y = pos_x, pos_y
+            return (self.pos_x, self.pos_y)
         else:
             # On ne bouge pas
             return (None)
         
     
     def combat(self, pos_actuelle):
-        if pos_actuelle == self.pos_arrivee and mac_gyver.compteurObjets == 3:
+        if pos_actuelle == self.niveau.pos_arrivee and self.niveau.outils.compteurObjets == 3:
             print("Vous avez tué le gardien. Vous êtes libre.")
-        elif pos_actuelle == self.pos_arrivee and mac_gyver.compteurObjets < 3:
+            return False
+        elif pos_actuelle == self.niveau.pos_arrivee and self.niveau.outils.compteurObjets < 3:
             print("Vous êtes mort !")
-        continuer = 0
-        return (continuer)
+            return False
+        return True
 
     def obtenir_position(self):
-        # print(self.posX, self.posY)
-        return self.posX, self.posY
+        # print(self.pos_x, self.pos_y)
+        return self.pos_x, self.pos_y
     
 def main():
     
-    niveau1 = Niveau("level_1")
+    niveau1 = Niveau("level_2")
     #elements_fixes.placer(niveau1)
     niveau1.outils.placer(niveau1)
     niveau1.afficher()
     
     #BOUCLE PRINCIPALE
-    continuer = 1 # et pourquoi pas plutot "true" ? #
+    continuer = True
     while continuer:
         
         deplacement = input(
-            "Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s) "
-            "ou 'p' pour sortir : "
+            "Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s) : "
         ).lower()
+        if deplacement in list("dqzs"):
+            
+            pos_actuelle = niveau1.personnage.deplacer(deplacement)       
+            niveau1.outils.ramasser(pos_actuelle)
+            continuer = niveau1.personnage.combat(pos_actuelle)
+
+            niveau1.afficher()
+        elif deplacement == "p":
+            continuer = False
         
-        pos_actuelle = niveau1.personnage.deplacer(deplacement)       
-        elements_fixes.ramasser(pos_actuelle)
-        mac_gyver.combat(pos_actuelle)
-        
-        niveau1.afficher()
 
 main()
