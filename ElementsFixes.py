@@ -1,11 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
 
-import random
-from Niveau.py import *
-from Personnage.py import *
-from Maze.py import *
-
 class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les 
     coordoonées des trois objets. """
