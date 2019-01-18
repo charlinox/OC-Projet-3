@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 # coding: utf-8
 
+from caractere import Caractere
+from items import Items
 
-class Niveau:
+class level:
 		
     def __init__(self, fichier):
         self.fichier = fichier

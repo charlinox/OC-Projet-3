@@ -6,8 +6,8 @@ import pygame
 from pygame.locals import *
 
 from niveau import Niveau
-from personnage import Personnage
-from elementsFixes import ElementsFixes
+from caractere import Caractere
+from items import ElementsFixes
 
 def main():
     

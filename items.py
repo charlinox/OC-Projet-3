@@ -3,7 +3,7 @@
 import random
 
 
-class ElementsFixes:
+class Items:
     """ Gestion des outils représenté par un set de trois tuples contenant les 
     coordoonées des trois objets. """
     def __init__(self):

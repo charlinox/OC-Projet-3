@@ -2,7 +2,7 @@
 # coding: utf-8
 
 
-class Personnage:
+class Caractere:
     
     def __init__(self, niveau):
         self.niveau = niveau
