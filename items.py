@@ -15,7 +15,7 @@ class Items:
         couloirs = niveau # Copie pour manipulation
         self.emplacement_outils = set(
             random.sample(
-                niveau.couloirs - {niveau.pos_depart, niveau.pos_arrivee}, 
+                niveau.couloirs - {niveau.pos_start, niveau.pos_arrivee}, 
                 3
             )
         )

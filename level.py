@@ -4,12 +4,12 @@
 from caractere import Caractere
 from items import Items
 
-class level:
+class Level:
 		
     def __init__(self, fichier):
         self.fichier = fichier
         self.couloirs = set()
-        self.depart = set()
+        self.start = set()
         self.arrivee = set()
         self.lire_fichier()
         self.personnage = Personnage(self) 
@@ -26,7 +26,7 @@ class level:
                     if col == '0':
                         self.couloirs.add((i, j))
                     elif col == 'd':
-                        self.depart.add((i,j))
+                        self.start.add((i,j))
                         self.couloirs.add((i, j))
                     elif col == 'a':
                         self.arrivee.add((i, j))
@@ -56,8 +56,8 @@ class level:
         return  position in self.couloirs
     
     @property
-    def pos_depart(self):
-        return list(self.depart)[0]
+    def pos_start(self):
+        return list(self.start)[0]
     
     @property
     def pos_arrivee(self):

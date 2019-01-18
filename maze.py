@@ -5,13 +5,11 @@ import random
 import pygame
 from pygame.locals import *
 
-from niveau import Niveau
-from caractere import Caractere
-from items import ElementsFixes
+from level import Level
 
 def main():
     
-    niveau1 = Niveau("level_2")
+    niveau1 = Level("level_2")
     niveau1.outils.placer(niveau1)
     niveau1.afficher()
     

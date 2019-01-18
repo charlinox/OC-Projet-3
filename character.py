@@ -2,11 +2,11 @@
 # coding: utf-8
 
 
-class Caractere:
+class Character:
     
     def __init__(self, niveau):
         self.niveau = niveau
-        self.pos_x, self.pos_y = self.niveau.pos_depart
+        self.pos_x, self.pos_y = self.niveau.pos_start
 
     def deplacer(self, deplacement):
         actions = {
