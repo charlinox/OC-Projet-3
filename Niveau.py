@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
 
+import Personnage
+import ElementsFixes
+
 class Niveau:
 		
     def __init__(self, fichier):

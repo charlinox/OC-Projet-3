@@ -6,9 +6,9 @@ import pygame
 from pygame.locals import *
 
 
-from Niveau import *
-from Personnage import *
-from ElementsFixes import *
+import Niveau
+import Personnage
+import ElementsFixes
 
 def main():
     

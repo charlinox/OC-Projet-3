@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
 
+import Niveau
+
 class Personnage:
     
     def __init__(self, niveau):
@@ -21,7 +23,7 @@ class Personnage:
             return (self.pos_x, self.pos_y)
         else:
             # On ne bouge pas
-            return (None)
+            return (self.pos_x, self.pos_y)
         
     
     def combat(self, pos_actuelle):

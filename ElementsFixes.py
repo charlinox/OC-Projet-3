@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
+import random
 
 class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les 
@@ -20,5 +21,5 @@ class ElementsFixes:
         
     def ramasser(self, pos_actuelle):
         if pos_actuelle in self.emplacement_outils:
-            self.emplacement_outils -= pos_actuelle
-            self.niveau.outils.compteurObjets += 1
+            self.emplacement_outils -= set(pos_actuelle)
+            self.compteurObjets += 1
