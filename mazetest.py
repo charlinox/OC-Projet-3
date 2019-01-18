@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: Utf-8 -*
+# coding: utf-8
 
 import random
 
@@ -148,4 +148,5 @@ def main():
             continuer = False
         
 
-main()
+if __name__ == "__main__":
+    main()

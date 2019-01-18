@@ -1,14 +1,13 @@
 #!/usr/bin/python3
-# -*- coding: Utf-8 -*
+# coding: utf-8
 
 import random
 import pygame
 from pygame.locals import *
 
-
-import Niveau
-import Personnage
-import ElementsFixes
+from niveau import Niveau
+from personnage import Personnage
+from elementsFixes import ElementsFixes
 
 def main():
     
@@ -35,4 +34,5 @@ def main():
             continuer = False
         
 
-main()
+if __name__ == "__main__":
+    main()

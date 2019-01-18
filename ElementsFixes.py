@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-# -*- coding: Utf-8 -*
+# coding: utf-8
 import random
+
 
 class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les 

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-# -*- coding: Utf-8 -*
+# coding: utf-8
 
-import Niveau
 
 class Personnage:
     

@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-# -*- coding: Utf-8 -*
+# coding: utf-8
 
-import Personnage
-import ElementsFixes
 
 class Niveau:
 		
