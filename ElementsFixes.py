@@ -21,4 +21,4 @@ class ElementsFixes:
     def ramasser(self, pos_actuelle):
         if pos_actuelle in self.emplacement_outils:
             self.emplacement_outils -= pos_actuelle
-            #self.niveau.outils.compteurObjets +=
+            self.niveau.outils.compteurObjets += 1
