@@ -1,3 +1,11 @@
+#!/usr/bin/python3
+# -*- coding: Utf-8 -*
+
+import random
+from Niveau.py import *
+from Personnage.py import *
+from Maze.py import *
+
 class ElementsFixes:
     """ Gestion des outils représenté par un set de trois tuples contenant les 
     coordoonées des trois objets. """
@@ -17,5 +25,5 @@ class ElementsFixes:
         
     def ramasser(self, pos_actuelle):
         if pos_actuelle in self.emplacement_outils:
-            self.emplacement_outils -= pos_actuelle()
-            self.niveau.outils.compteurObjets +=
+            self.emplacement_outils -= pos_actuelle
+            #self.niveau.outils.compteurObjets +=

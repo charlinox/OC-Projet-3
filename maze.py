@@ -5,9 +5,12 @@ import random
 import pygame
 from pygame.locals import *
 
-from ElementsFixes import *
-from Personnage import *
+import Niveau
 from Niveau import *
+from Personnage import *
+from ElementsFixes import *
+import Personnage
+import ElementsFixes
 
 def main():
     

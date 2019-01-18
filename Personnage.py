@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: Utf-8 -*
+
 class Personnage:
     
     def __init__(self, niveau):

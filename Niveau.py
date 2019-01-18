@@ -1,3 +1,14 @@
+#!/usr/bin/python3
+# -*- coding: Utf-8 -*
+
+import random
+
+from Maze.py import *
+from Personnage.py import *
+from ElementsFixes.py import *
+
+
+
 class Niveau:
 		
     def __init__(self, fichier):
