@@ -7,30 +7,26 @@ from pygame.locals import *
 
 from level import Level
 
+
 def main():
     
-    niveau1 = Level("level_2")
-    niveau1.outils.placer(niveau1)
-    niveau1.afficher()
+    level1 = Level("level_2")
+    level1.tools.put(level1)
+    level1.display()
     
-    #BOUCLE PRINCIPALE
-    continuer = True
-    while continuer:
-        
-        deplacement = input(
-            "Veuillez entrer une lettre pour déplacer Mac Gyver (d, q, z, s et p pour sortir) : "
+    stay = True
+    while stay:        
+        movement = input(
+            "Veuillez entrer une lettre pour déput Mac Gyver (d, q, z, s) : "
         ).lower()
-        if deplacement in list("dqzs"):
-            
-            pos_actuelle = niveau1.personnage.deplacer(deplacement)       
-            niveau1.outils.ramasser(pos_actuelle)
-            continuer = niveau1.personnage.combat(pos_actuelle)
-
-            niveau1.afficher()
-        elif deplacement == "p":
+        if movement in list("dqzs"):            
+            pos_current = level1.mac_gyver.move(movement)       
+            level1.tools.pick_up(pos_current)
+            stay = level1.mac_gyver.fight(pos_current)
+            level1.display()
+        elif movement == "p":
             print("Vous vous êtes perdu dans le labyrinthe du python !")
-            continuer = False
-        
+            stay = False        
 
 if __name__ == "__main__":
     main()

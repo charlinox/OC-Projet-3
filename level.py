@@ -1,64 +1,61 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-from caractere import Caractere
+from character import Character
 from items import Items
+
 
 class Level:
 		
-    def __init__(self, fichier):
-        self.fichier = fichier
-        self.couloirs = set()
+    def __init__(self, file):
+        self.file = file
+        self.passages = set()
         self.start = set()
-        self.arrivee = set()
-        self.lire_fichier()
-        self.personnage = Personnage(self) 
-        self.outils = ElementsFixes()
-        
+        self.exit = set()
+        self.read_file()
+        self.mac_gyver = Character(self) 
+        self.tools = Items()        
 		        
-    def lire_fichier(self):
-        """Méthode permettant de lire le fichier en créant un set contenant les tuples 
-        des coordonnées des espaces vides (les couloirs)"""
-        with open(self.fichier) as f:
+    def read_file(self):
+        """  Method for reading the file by creating a set containing the tuples of the coordinates of the empty spaces (the passages).  """
+        with open(self.file) as f:
 
             for i, ligne in enumerate(f):
                 for j, col in enumerate(ligne):
                     if col == '0':
-                        self.couloirs.add((i, j))
+                        self.passages.add((i, j))
                     elif col == 'd':
                         self.start.add((i,j))
-                        self.couloirs.add((i, j))
+                        self.passages.add((i, j))
                     elif col == 'a':
-                        self.arrivee.add((i, j))
-                        self.couloirs.add((i, j))
-
+                        self.exit.add((i, j))
+                        self.passages.add((i, j))
     
-    def afficher(self):
+    def display(self):
         maze = ""
         for index_line in range(15):
             for index_col in range(15):
-                if (index_line, index_col) in self.couloirs:
-                    if (index_line, index_col) == self.personnage.obtenir_position():
-                        maze += "P" # affichage du personnage #
-                    elif (index_line, index_col) in self.outils.emplacement_outils:
-                        maze += "O" # affichage de trois outils génériques #
-                    elif (index_line, index_col) == self.pos_arrivee:
-                        maze += "G" # affichage du gardien #
+                if (index_line, index_col) in self.passages:                    
+                    if (index_line, index_col) == self.mac_gyver.get_position():
+                        maze += "P"  # Display of the charachter
+                    elif (index_line, index_col) in self.tools.location_tools:
+                        maze += "O"  # Display of the three generic tools
+                    elif (index_line, index_col) == self.pos_exit:
+                        maze += "G"  # Diplay of the gardian
                     else:
-                        maze += " " # affichage d'un couloir vide #
+                        maze += " "  # Dislay of a empty passage
                 else:
-                    maze += "X" # affichage d'un mur #
-            maze += "\n"
-        
+                    maze += "X"  # Display of a wall
+            maze += "\n"        
         print(maze)
 
-    def est_permis(self, position):
-        return  position in self.couloirs
+    def is_allowed(self, position):
+        return  position in self.passages
     
     @property
-    def pos_start(self):
+    def pos_start(self):        
         return list(self.start)[0]
     
     @property
-    def pos_arrivee(self):
-        return list(self.arrivee)[0]
+    def pos_exit(self):        
+        return list(self.exit)[0]

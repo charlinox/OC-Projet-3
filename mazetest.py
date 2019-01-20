@@ -4,6 +4,7 @@
 import random
 
 class Level:
+    """ Class representing the level of the maze. """
 		
     def __init__(self, file):
         self.file = file
@@ -16,8 +17,9 @@ class Level:
         
 		        
     def read_file(self):
-        """Méthode permettant de read le file en créant un set contenant les tuples 
-        des coordonnées des espaces vides (les passages)"""
+        """ Method for reading the file by creating a set containing the tuples of the coordinates of the empty spaces (the passages).
+        """
+        
         with open(self.file) as f:
 
             for i, ligne in enumerate(f):
@@ -33,6 +35,8 @@ class Level:
 
     
     def display(self):
+        """ Display the maze in consol. """
+        
         maze = ""
         for index_line in range(15):
             for index_col in range(15):
@@ -63,14 +67,17 @@ class Level:
         return list(self.exit)[0]
 
 class Items:
-    """ Gestion des tools représenté par un set de trois tuples contenant les 
-    coordoonées des trois objets. """
+    """ Tool management represented by a set of three tuples containing the coordinates of the three objects.
+    """
+    
     def __init__(self):
         self.location_tools = None
         self.object_counter = 0
         
     def put(self, level):
-        """ Création d'un set contenant les coordoonées des trois tools à pick_up. """
+        """ Creation of a set containing the coordinates of the three tools to pick_up. 
+        """
+        
         passages = level #.passages  ? # Copie pour manipulation.  #
         self.location_tools = set(
             random.sample(
@@ -84,7 +91,7 @@ class Items:
             self.object_counter += 1
             self.location_tools -= {pos_current}
             
-            
+
 class Character:
     
     def __init__(self, level):

@@ -4,23 +4,26 @@ import random
 
 
 class Items:
-    """ Gestion des outils représenté par un set de trois tuples contenant les 
-    coordoonées des trois objets. """
+    """ Tool management represented by a set of three tuples containing the coordinates of the three objects.
+    """
+    
     def __init__(self):
-        self.emplacement_outils = None
-        self.compteurObjets = 0
+        self.location_tools = None
+        self.object_counter = 0
         
-    def placer(self, niveau):
-        """ Création d'un set contenant les coordoonées des trois outils à ramasser. """
-        couloirs = niveau # Copie pour manipulation
-        self.emplacement_outils = set(
+    def put(self, level):
+        """ Creation of a set containing the coordinates of the three tools to pick_up. 
+        """
+        
+        passages = level  # Copy for manipulation
+        self.location_tools = set(
             random.sample(
-                niveau.couloirs - {niveau.pos_start, niveau.pos_arrivee}, 
+                level.passages - {level.pos_start, level.pos_exit}, 
                 3
             )
         )
         
-    def ramasser(self, pos_actuelle):
-        if pos_actuelle in self.emplacement_outils:
-            self.emplacement_outils -= set(pos_actuelle)
-            self.compteurObjets += 1
+    def pick_up(self, pos_current):
+        if pos_current in self.location_tools:
+            self.object_counter += 1
+            self.location_tools -= {pos_current}
