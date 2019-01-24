@@ -10,10 +10,10 @@ class Character:
 
     def move(self, movement):
         actions = {
-            "d": lambda: (self.pos_x, self.pos_y+1),
-            "q": lambda: (self.pos_x, self.pos_y-1),
-            "z": lambda: (self.pos_x-1, self.pos_y),
-            "s": lambda: (self.pos_x+1, self.pos_y),
+            "K_RIGHT": lambda: (self.pos_x, self.pos_y+1),
+            "K_LEFT": lambda: (self.pos_x, self.pos_y-1),
+            "K_UP": lambda: (self.pos_x-1, self.pos_y),
+            "K_DOWN": lambda: (self.pos_x+1, self.pos_y),
         }
         pos_x, pos_y = actions[movement]()
 
@@ -27,11 +27,11 @@ class Character:
     def fight(self, pos_current):
         if pos_current == self.level.pos_exit \
                 and self.level.tools.object_counter == 3:
-            print("Vous avez tué le gardien. Vous êtes libre.")
+            # print("Vous avez tué le gardien. Vous êtes libre.")
             return False
         elif pos_current == self.level.pos_exit \
                 and self.level.tools.object_counter < 3:
-            print("Vous êtes mort !")
+            # print("Vous êtes mort !")
             return False
         return True
 
