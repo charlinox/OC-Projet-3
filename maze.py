@@ -37,7 +37,6 @@ def welcome_loop():
 
 def game_loop(level1):
     """  The game !  """
-    #picture_background = pygame.image.load("images/background.jpg").convert()
     level1.display()
     pygame.display.flip()
 
@@ -50,7 +49,7 @@ def game_loop(level1):
             stay = level1.mac_gyver.fight(pos_current)
             level1.display()
             pygame.display.flip()
-        elif movement == K_p:
+        elif movement == K_ESCAPE:
             print("Vous vous êtes perdu dans le labyrinthe du python !")
             stay = False
 
