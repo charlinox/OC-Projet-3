@@ -15,10 +15,10 @@ class Character:
     def move(self, movement):
         """  Moving the character  """
         actions = {
-            K_RIGHT: lambda: (self.pos_x, self.pos_y+1),
-            K_LEFT: lambda: (self.pos_x, self.pos_y-1),
-            K_UP: lambda: (self.pos_x-1, self.pos_y),
-            K_DOWN: lambda: (self.pos_x+1, self.pos_y),
+            K_RIGHT: lambda: (self.pos_x, self.pos_y + 1),
+            K_LEFT: lambda: (self.pos_x, self.pos_y - 1),
+            K_UP: lambda: (self.pos_x - 1, self.pos_y),
+            K_DOWN: lambda: (self.pos_x + 1, self.pos_y),
         }
         pos_x, pos_y = actions[movement]()
 
@@ -31,7 +31,7 @@ class Character:
 
     def fight(self, pos_current):
         """  The character wins the fight if he arrives on the guardian
-         with the three tools in his possession  """
+                  with the three tools in his possession  """
         if pos_current == self.level.pos_exit \
                 and self.level.tools.object_counter == 3:
             # print("Vous avez tué le gardien. Vous êtes libre.")

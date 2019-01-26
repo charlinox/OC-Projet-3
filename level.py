@@ -8,7 +8,7 @@ from items import Items
 class Level:
 
     def __init__(self, file):
-        self.file = file    
+        self.file = file
         self.passages = set()
         self.start = set()
         self.exit = set()
@@ -33,7 +33,7 @@ class Level:
                         self.passages.add((i, j))
 
     def display(self):
-        """  Display the maze in console mode  """ 
+        """  Display the maze in console mode  """
         maze = ""
         for index_line in range(15):
             for index_col in range(15):

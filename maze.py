@@ -7,6 +7,7 @@ from pygame.locals import *
 from graphic_level import GraphicLevel
 from inputs import inputs
 
+
 def welcome_loop():
     """ Welcome screen  """
     pygame.init()
@@ -18,7 +19,7 @@ def welcome_loop():
     stay = True
     while stay:
         pygame.time.Clock().tick(100)
-        fenetre.blit(welcome_game, (0,0))
+        fenetre.blit(welcome_game, (0, 0))
         pygame.display.flip()
         if stay:
             for event in pygame.event.get():
@@ -29,15 +30,17 @@ def welcome_loop():
                         stay = False
                     elif event.key == pygame.K_c:
                         stay = False
-                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                elif event.type == pygame.MOUSEBUTTONDOWN \
+                        and event.button == 1:
                     stay = False
+
 
 def game_loop(level1):
     """  The game !  """
-    picture_background = pygame.image.load("images/background.jpg").convert()
+    #picture_background = pygame.image.load("images/background.jpg").convert()
     level1.display()
     pygame.display.flip()
-    
+
     stay = True
     while stay:
         movement = inputs()
@@ -51,12 +54,15 @@ def game_loop(level1):
             print("Vous vous êtes perdu dans le labyrinthe du python !")
             stay = False
 
-def main():
-    """  Main frame  """    
 
-    # Can choose a level and the console mode (Level) or graphic mode (GraphicLevel) here
-    level1 = GraphicLevel("level_2") 
-    level1.tools.put(level1) # Setting up tools
+def main():
+    """  Main frame  """
+
+    # Can choose a level and the console mode (Level) or graphic mode
+    # (GraphicLevel) here
+    level1 = GraphicLevel("level_2")
+    # Setting up tools
+    level1.tools.put(level1)
 
     welcome_loop()
     game_loop(level1)
