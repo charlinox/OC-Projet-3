@@ -8,7 +8,7 @@ from items import Items
 class Level:
 
     def __init__(self, file):
-        self.file = file
+        self.file = file    
         self.passages = set()
         self.start = set()
         self.exit = set()
@@ -17,8 +17,8 @@ class Level:
         self.tools = Items()
 
     def read_file(self):
-        """ Method for reading the file by creating a set containing
-        the tuples of the coordinates of the empty spaces (the passages). """
+        """  Read the maze file by creating a set containing
+        the tuples of the coordinates of empty spaces (passages)  """
         with open(self.file) as f:
 
             for i, ligne in enumerate(f):
@@ -33,6 +33,7 @@ class Level:
                         self.passages.add((i, j))
 
     def display(self):
+        """  Display the maze in console mode  """ 
         maze = ""
         for index_line in range(15):
             for index_col in range(15):
@@ -52,6 +53,7 @@ class Level:
         print(maze)
 
     def is_allowed(self, position):
+        """  Wall collision test  """
         return position in self.passages
 
     @property

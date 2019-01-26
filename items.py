@@ -25,6 +25,7 @@ class Items:
         )
 
     def pick_up(self, pos_current):
+        """  The character picks up a tool while moving on it  """
         if pos_current in self.location_tools:
             self.object_counter += 1
             self.location_tools -= {pos_current}

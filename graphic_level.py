@@ -6,52 +6,41 @@ from pygame.locals import *
 
 from character import Character
 from items import Items
+from level import Level
 
 
 class GraphicLevel(Level):
-    """ Classe redéfinisant la méthode d'affichage dysplay() en s'appuyant sur l'héritage de la classe Level. """
-    Level.__init__(self, file)
+    """ Class redefines the display() method based on the inheritance of the Level class """
+    def __init__(self, file):
+        super().__init__(file)
+        self.items = {}
 
     def display(self):
-        """  Méthode spécifiquement redéfinie pour afficher graphiquement le maze. """ 
+        """  Method specifically redefined to display the maze graphically """ 
         
-        """  Initialisation et chargement de l'image de fond.  """ 
-        pygame.init()
-        #Ouverture de la fenêtre Pygame (900 par 900 correspond à un maze 15x15 de cases de 60x60)
-        fenetre = pygame.display.set_mode((900, 900))
-        picture_background = pygame.image.load(background.jpg).convert()
-        pygame.display.set_icon(picture_background)
-        pygame.display.set_caption(OC python project n°3)
+        """  Initializing and loading the background image  """        
+        fenetre = pygame.display.get_surface()
+        picture_background = pygame.image.load("images/background.jpg").convert()
         fenetre.blit(picture_background, (0,0))
-        pygame.display.flip()
+        """  Loading sprites  """
+        pic_mac_gyver = pygame.image.load("images/mac_gyver.png").convert_alpha()
+        pic_gardian = pygame.image.load("images/gardian.png").convert_alpha()
+        pic_wall = pygame.image.load("images/wall.png").convert()
+        pic_ether = pygame.image.load("images/tube_plastique.png").convert()
+        pic_ether.set_colorkey((255,255,255)) #Rend le blanc (valeur RGB : 255,255,255) de l'image transparent
 
-        """  Chargement des sprite  """
-        pic_character = pygame.image.load(MacGyver.png).convert()
-        pic_gardian = pygame.image.load(gardian.png).convert()
-		pic_wall = pygame.image.load(wall.png).convert()
-		pic_start = pygame.image.load(start.png).convert()
-		pic_generic_tool = pygame.image.load(generic_tool.png).convert()
-        # empty = pygame.image.load(empty.png).convert() probablement pas à définir
-
-        # maze = ""
         for index_line in range(15):
-            x = index_line * 60
+            y = index_line * 60
             for index_col in range(15):
-                y = index_col * 60
+                x = index_col * 60
                 if (index_line, index_col) in self.passages:
                     if (index_line, index_col) \
                             == self.mac_gyver.get_position():                        
-                        fenetre.blit(pic_character, (x,y))
+                        fenetre.blit(pic_mac_gyver, (x,y))                        
                     elif (index_line, index_col) in self.tools.location_tools:
-                        fenetre.blit(pic_generic_tool, (x,y))
+                        fenetre.blit(pic_ether, (x,y))
+                        #self.items[x, y] = pic_generic_tool
                     elif (index_line, index_col) == self.pos_exit:
                         fenetre.blit(pic_gardian, (x,y))
-                    # else:                        
-                        # Dislay of a empty passage
-                        # fenetre.blit(empty, (x,y))
                 else:
                     fenetre.blit(pic_wall, (x,y))
-            # maze += "\n"
-
-        # fenetre.blit(picture_background, (0,0))
-        pygame.display.flip()
