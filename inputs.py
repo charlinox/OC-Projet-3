@@ -6,12 +6,11 @@ import sys
 import pygame
 from pygame.locals import *
 
-
 def inputs():
-    """  Class handling keyboard and mouse inputs  """
+    """  Classe gérant les entrées clavier et souris.  """
 
     pygame.time.Clock().tick(30)
-    for event in pygame.event.get():
+    for event in pygame.event.get():		
         if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
             return K_p
         elif event.type == KEYDOWN:
