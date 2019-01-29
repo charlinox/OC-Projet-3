@@ -11,9 +11,9 @@ from inputs import inputs
 
 def screen_loop(picture):
     """ Welcome screen  """
-    # Opening the Pygame window (900x1000 corresponds
-    # to a maze of 15x15 squares of 60x60 pixels + tools banner)
-    fenetre = pygame.display.set_mode((1000, 900))
+    # Opening the Pygame window (600x700 corresponds
+    # to a maze of 15x15 squares of 40x40 pixels + tools banner)
+    fenetre = pygame.display.set_mode((700, 600))
     # !!! quand je veux mettre cette ligne dans main(), ca ne marche pas ?!?
 
     screen = pygame.image.load("images/" + picture).convert_alpha()
@@ -38,7 +38,9 @@ def game_loop(level_num):
         if move in list((K_LEFT, K_UP, K_RIGHT, K_DOWN)):
             pos_current = level_num.mac_gyver.move(move)
             level_num.tools.pick_up(pos_current)
-            stay = level_num.mac_gyver.fight(pos_current)                    
+            stay = level_num.mac_gyver.fight(pos_current)
+            level_num.display()
+            pygame.display.flip()
             if stay == "win":
                 screen_loop("free.png")
                 stay = False
@@ -46,8 +48,7 @@ def game_loop(level_num):
                 screen_loop("defeat.png")
                 stay = False                    
 
-            level_num.display()
-            pygame.display.flip()
+            
         elif move == "end":
             stay = False
 
@@ -56,17 +57,17 @@ def main():
     """  Main frame  """
 
     pygame.init()
-    
+
     screen_loop("welcome_game.png")
 
     # Can choose a level and the console mode (Level) or graphic mode
     # (GraphicLevel) here
-    level1 = GraphicLevel("level_2")
+    game_level = GraphicLevel("level_2")
 
     # Setting up tools
-    level1.tools.put(level1)
+    game_level.tools.put(game_level)
 
-    game_loop(level1)
+    game_loop(game_level)
 
 
 if __name__ == "__main__":

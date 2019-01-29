@@ -46,9 +46,9 @@ class GraphicLevel(Level):
 
         for index_line in range(15):
             # Inversion of x and y in graphical representation
-            y = index_line * 60
+            y = index_line * 40
             for index_col in range(15):
-                x = index_col * 60
+                x = index_col * 40
                 if (index_line, index_col) in self.passages:
                     if (index_line, index_col) \
                             == self.mac_gyver.get_position():
@@ -67,8 +67,8 @@ class GraphicLevel(Level):
                 else:
                     fenetre.blit(pic_wall, (x, y))
 
-        if "E" in list(self.tools.pouch):
-            
+        #if "E" in list(self.tools.pouch):
+
 
         # if self.mac_gyver.fight == "win":
         #     fenetre.blit(pic_free, (0, 0))  # you win
