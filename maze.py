@@ -5,65 +5,67 @@ import pygame
 from pygame.locals import *
 
 from graphic_level import GraphicLevel
+from level import Level
 from inputs import inputs
 
 
-def welcome_loop():
+def screen_loop(picture):
     """ Welcome screen  """
-    pygame.init()
     # Opening the Pygame window (900x1000 corresponds
     # to a maze of 15x15 squares of 60x60 pixels + tools banner)
-    fenetre = pygame.display.set_mode((900, 1000))
-    welcome_game = pygame.image.load("images/welcome_game.png").convert()
+    fenetre = pygame.display.set_mode((1000, 900))
+    # !!! quand je veux mettre cette ligne dans main(), ca ne marche pas ?!?
+
+    screen = pygame.image.load("images/" + picture).convert_alpha()
     pygame.display.set_caption("OC python project n°3")
     stay = True
     while stay:
         pygame.time.Clock().tick(100)
-        fenetre.blit(welcome_game, (0, 0))
+        fenetre.blit(screen, (0, 0))
         pygame.display.flip()
-        if stay:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    stay = False
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        stay = False
-                    elif event.key == pygame.K_c:
-                        stay = False
-                elif event.type == pygame.MOUSEBUTTONDOWN \
-                        and event.button == 1:
-                    stay = False
+        if inputs() == "end":
+            stay = False
 
 
-def game_loop(level1):
+def game_loop(level_num):
     """  The game !  """
-    level1.display()
+    level_num.display()
     pygame.display.flip()
 
     stay = True
     while stay:
-        movement = inputs()
-        if movement in list((K_LEFT, K_UP, K_RIGHT, K_DOWN)):
-            pos_current = level1.mac_gyver.move(movement)
-            level1.tools.pick_up(pos_current)
-            stay = level1.mac_gyver.fight(pos_current)
-            level1.display()
+        move = inputs()
+        if move in list((K_LEFT, K_UP, K_RIGHT, K_DOWN)):
+            pos_current = level_num.mac_gyver.move(move)
+            level_num.tools.pick_up(pos_current)
+            stay = level_num.mac_gyver.fight(pos_current)                    
+            if stay == "win":
+                screen_loop("free.png")
+                stay = False
+            elif stay == "defeat":
+                screen_loop("defeat.png")
+                stay = False                    
+
+            level_num.display()
             pygame.display.flip()
-        elif movement == K_ESCAPE:
-            print("Vous vous êtes perdu dans le labyrinthe du python !")
+        elif move == "end":
             stay = False
 
 
 def main():
     """  Main frame  """
 
+    pygame.init()
+    
+    screen_loop("welcome_game.png")
+
     # Can choose a level and the console mode (Level) or graphic mode
     # (GraphicLevel) here
     level1 = GraphicLevel("level_2")
+
     # Setting up tools
     level1.tools.put(level1)
 
-    welcome_loop()
     game_loop(level1)
 
 

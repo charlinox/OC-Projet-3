@@ -32,14 +32,11 @@ class Character:
     def fight(self, pos_current):
         """  The character wins the fight if he arrives on the guardian
                   with the three tools in his possession  """
-        if pos_current == self.level.pos_exit \
-                and self.level.tools.object_counter == 3:
-            # print("Vous avez tué le gardien. Vous êtes libre.")
-            return False
-        elif pos_current == self.level.pos_exit \
-                and self.level.tools.object_counter < 3:
-            # print("Vous êtes mort !")
-            return False
+        if pos_current == self.level.pos_exit:
+            if self.level.tools.object_counter == 3:
+                return "win"
+            elif self.level.tools.object_counter < 3:
+                return "defeat"
         return True
 
     def get_position(self):

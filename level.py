@@ -41,8 +41,12 @@ class Level:
                     if (index_line, index_col) \
                             == self.mac_gyver.get_position():
                         maze += "P"  # Display of the charachter
-                    elif (index_line, index_col) in self.tools.location_tools:
-                        maze += "O"  # Display of the three generic tools
+                    elif (index_line, index_col) in self.tools.location_ether:
+                        maze += "E"  # Display of the ether
+                    elif (index_line, index_col) in self.tools.location_tube:
+                        maze += "T"  # Display of the tube
+                    elif (index_line, index_col) in self.tools.location_niddle:
+                        maze += "N"  # Display of the niddle
                     elif (index_line, index_col) == self.pos_exit:
                         maze += "G"  # Diplay of the gardian
                     else:
@@ -50,7 +54,12 @@ class Level:
                 else:
                     maze += "X"  # Display of a wall
             maze += "\n"
+        maze += "Pouch : " + self.tools.pouch
         print(maze)
+        if self.mac_gyver.fight == "win":
+            print("Vous avez tué le gardien. Vous êtes libre.")
+        elif self.mac_gyver.fight == "defeat":
+            print("Vous êtes mort !")
 
     def is_allowed(self, position):
         """  Wall collision test  """
