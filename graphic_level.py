@@ -38,6 +38,7 @@ class GraphicLevel(Level):
         pic_syringe = pygame.image.load("images/syringe.png").convert()
         pic_free = pygame.image.load("images/free.png").convert_alpha()
         pic_defeat = pygame.image.load("images/defeat.png").convert_alpha()
+        mask_wall = pygame.image.load("images/mask_wall.jpg").convert()
         # Makes transparent the color white (RGB value: 255,255,255) of the picture
         pic_tube.set_colorkey((255, 255, 255))
         pic_syringe.set_colorkey((255, 255, 255))
@@ -67,7 +68,18 @@ class GraphicLevel(Level):
                 else:
                     fenetre.blit(pic_wall, (x, y))
 
-        #if "E" in list(self.tools.pouch):
+        # management of the pouch
+        fenetre.blit(mask_wall, (600, 0))
+        if len(self.tools.pouch) < 3:
+            if "E" in list(self.tools.pouch):
+                fenetre.blit(pic_ether, (610, 50))
+            if "T" in list(self.tools.pouch):
+                fenetre.blit(pic_tube, (610, 100))
+            if "N" in list(self.tools.pouch):
+                fenetre.blit(pic_niddle, (610, 150))
+        elif len(self.tools.pouch) == 3:
+            fenetre.blit(mask_wall, (600, 0))
+            fenetre.blit(pic_syringe, (600, 80))
 
 
         # if self.mac_gyver.fight == "win":
