@@ -9,24 +9,21 @@ from items import Items
 from level import Level
 from inputs import inputs
 
-#from maze import screen_loop
-
 
 class GraphicLevel(Level):
     """ Class redefines the display() method based on the inheritance of the Level class """
 
     def __init__(self, file):
         super().__init__(file)
-        #self.items = {}
 
     def display(self):
         """  Method specifically redefined to display the maze graphically """
 
         """  Initializing and loading pictures  """
-        fenetre = pygame.display.get_surface()
+        windows = pygame.display.get_surface()
         picture_background = pygame.image.load(
             "images/background.jpg").convert()
-        fenetre.blit(picture_background, (0, 0))
+        windows.blit(picture_background, (0, 0))
         """  Loading sprites  """
         pic_mac_gyver = pygame.image.load(
             "images/mac_gyver.png").convert_alpha()
@@ -38,7 +35,7 @@ class GraphicLevel(Level):
         pic_syringe = pygame.image.load("images/syringe.png").convert()
         pic_free = pygame.image.load("images/free.png").convert_alpha()
         pic_defeat = pygame.image.load("images/defeat.png").convert_alpha()
-        mask_wall = pygame.image.load("images/mask_wall.jpg").convert()
+        mask_wall = pygame.image.load("images/mask_wall2.jpg").convert()
         # Makes transparent the color white (RGB value: 255,255,255) of the picture
         pic_tube.set_colorkey((255, 255, 255))
         pic_syringe.set_colorkey((255, 255, 255))
@@ -46,53 +43,34 @@ class GraphicLevel(Level):
 
 
         for index_line in range(15):
-            # Inversion of x and y in graphical representation
+            # x and y inversion in graphical representation
             y = index_line * 40
             for index_col in range(15):
                 x = index_col * 40
                 if (index_line, index_col) in self.passages:
                     if (index_line, index_col) \
                             == self.mac_gyver.get_position():
-                        fenetre.blit(pic_mac_gyver, (x, y))
-                    # elif (index_line, index_col) in self.tools.location_tools:
-                    #     fenetre.blit(pic_ether, (x, y))
-                        #self.items[x, y] = pic_generic_tool
+                        windows.blit(pic_mac_gyver, (x, y))
                     elif (index_line, index_col) == self.tools.location_ether:
-                        fenetre.blit(pic_ether, (x, y))  # Display of the ether
+                        windows.blit(pic_ether, (x, y))  # Display of the ether
                     elif (index_line, index_col) == self.tools.location_tube:
-                        fenetre.blit(pic_tube, (x, y))  # Display of the tube
+                        windows.blit(pic_tube, (x, y))  # Display of the tube
                     elif (index_line, index_col) == self.tools.location_niddle:
-                        fenetre.blit(pic_niddle, (x, y))  # Display of the niddle
+                        windows.blit(pic_niddle, (x, y))  # Display of the niddle
                     elif (index_line, index_col) == self.pos_exit:
-                        fenetre.blit(pic_gardian, (x, y))  # Display of the guardian
+                        windows.blit(pic_gardian, (x, y))  # Display of the guardian
                 else:
-                    fenetre.blit(pic_wall, (x, y))
+                    windows.blit(pic_wall, (x, y))
 
-        # management of the pouch
-        fenetre.blit(mask_wall, (600, 0))
+        # Pouch management
+        windows.blit(mask_wall, (600, 0))
         if len(self.tools.pouch) < 3:
             if "E" in list(self.tools.pouch):
-                fenetre.blit(pic_ether, (610, 50))
+                windows.blit(pic_ether, (610, 50))
             if "T" in list(self.tools.pouch):
-                fenetre.blit(pic_tube, (610, 100))
+                windows.blit(pic_tube, (610, 100))
             if "N" in list(self.tools.pouch):
-                fenetre.blit(pic_niddle, (610, 150))
+                windows.blit(pic_niddle, (610, 150))
         elif len(self.tools.pouch) == 3:
-            fenetre.blit(mask_wall, (600, 0))
-            fenetre.blit(pic_syringe, (600, 80))
-
-
-        # if self.mac_gyver.fight == "win":
-        #     fenetre.blit(pic_free, (0, 0))  # you win
-        #     #pygame.time.Clock().tick(300)
-        #     while stay:
-        #         if inputs() == "end":
-        #             stay = False
-        #     #screen_loop("images/free.png")
-
-        # elif self.mac_gyver.fight == "defeat":
-        #     fenetre.blit(pic_defeat, (0, 0))  # you loose
-        #     #pygame.time.Clock().tick(300)
-        #     while stay:
-        #         if inputs() == "end":
-        #             stay = False
+            windows.blit(mask_wall, (600, 0))
+            windows.blit(pic_syringe, (600, 200))
