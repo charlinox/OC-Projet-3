@@ -20,7 +20,7 @@ $ cd OC-Projet-3-master
 
 $ pip3 install pipenv ou $ pip install pipenv
 
-(sous windows) $ pipenv install
+$ pipenv install
 
 $ pipenv run maze.py
 
