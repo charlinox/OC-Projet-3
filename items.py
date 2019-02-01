@@ -32,7 +32,6 @@ class Items:
         self.location_tube = next(tools)
         self.location_niddle = next(tools)
 
-
     def pick_up(self, pos_current):
         """  The character picks up a tool while moving on it  """
         if pos_current in self.location_tools:
@@ -46,4 +45,4 @@ class Items:
                 self.location_niddle = None
                 self.pouch += "N"
             self.object_counter += 1
-            self.location_tools -= {pos_current}        
+            self.location_tools -= {pos_current}

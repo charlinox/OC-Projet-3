@@ -2,16 +2,13 @@
 # coding: utf-8
 
 import pygame
-from pygame.locals import *
 
-from character import Character
-from items import Items
 from level import Level
-from inputs import inputs
 
 
 class GraphicLevel(Level):
-    """ Class redefines the display() method based on the inheritance of the Level class """
+    """  Class redefines the display() method based
+    on the inheritance of the Level class  """
 
     def __init__(self, file):
         super().__init__(file)
@@ -31,19 +28,14 @@ class GraphicLevel(Level):
         pic_wall = pygame.image.load("images/wall.png").convert()
         pic_ether = pygame.image.load("images/ether.png").convert()
         pic_tube = pygame.image.load("images/tube.png").convert()
-        pic_niddle = pygame.image.load("images/niddle.png").convert_alpha()
+        pic_niddle = pygame.image.load("images/niddle2.png").convert_alpha()
         pic_syringe = pygame.image.load("images/syringe.png").convert()
-        pic_free = pygame.image.load("images/free.png").convert_alpha()
-        pic_defeat = pygame.image.load("images/defeat.png").convert_alpha()
         mask_wall = pygame.image.load("images/mask_wall2.jpg").convert()
-        # Makes transparent the color white (RGB value: 255,255,255) of the picture
         pic_tube.set_colorkey((255, 255, 255))
         pic_syringe.set_colorkey((255, 255, 255))
         pic_ether.set_colorkey((1, 1, 1))
 
-
         for index_line in range(15):
-            # x and y inversion in graphical representation
             y = index_line * 40
             for index_col in range(15):
                 x = index_col * 40
@@ -56,9 +48,11 @@ class GraphicLevel(Level):
                     elif (index_line, index_col) == self.tools.location_tube:
                         windows.blit(pic_tube, (x, y))  # Display of the tube
                     elif (index_line, index_col) == self.tools.location_niddle:
-                        windows.blit(pic_niddle, (x, y))  # Display of the niddle
+                        # Display of the niddle
+                        windows.blit(pic_niddle, (x, y))
                     elif (index_line, index_col) == self.pos_exit:
-                        windows.blit(pic_gardian, (x, y))  # Display of the guardian
+                        # Display of the guardian
+                        windows.blit(pic_gardian, (x, y))
                 else:
                     windows.blit(pic_wall, (x, y))
 

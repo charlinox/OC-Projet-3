@@ -7,8 +7,9 @@ from game import Game
 def main():
     """  Start  """
 
-    game = Game("levels/level_2")
+    game = Game("levels/level_1")
     game.start()
+
 
 if __name__ == "__main__":
     main()

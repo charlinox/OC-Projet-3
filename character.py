@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-import pygame
 from pygame.locals import *
 
 
@@ -31,7 +30,7 @@ class Character:
 
     def fight(self, pos_current):
         """  The character wins the fight if he arrives on the guardian
-                  with the three tools in his possession  """
+        with the three tools in his possession  """
         if pos_current == self.level.pos_exit:
             if self.level.tools.object_counter == 3:
                 return "win"
@@ -40,5 +39,5 @@ class Character:
         return True
 
     def get_position(self):
-        """  Retourne la position du personnage  """
+        """  Return the character position  """
         return self.pos_x, self.pos_y

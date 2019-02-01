@@ -5,12 +5,12 @@ import pygame
 from pygame.locals import *
 
 from graphic_level import GraphicLevel
-from level import Level
 from inputs import inputs
 
 
 class Game:
-    """ Class redefines the display() method based on the inheritance of the Level class """
+    """ Class redefines the display() method based
+    on the inheritance of the Level class """
 
     def __init__(self, level_path):
         pygame.init()
@@ -29,7 +29,6 @@ class Game:
             pygame.display.flip()
             if inputs() == "end":
                 stay = False
-
 
     def game_loop(self, level_num):
         """  The game !  """
@@ -56,10 +55,10 @@ class Game:
 
     def start(self):
         """  Main frame  """
-        
+
         # Opening the Pygame window (660x600 corresponds
         # to a maze of 15x15 squares of 40x40 pixels + tools banner)
-        windows = pygame.display.set_mode((660, 600))
+        pygame.display.set_mode((660, 600))
 
         self.screen_loop("welcome_game.png")
 
