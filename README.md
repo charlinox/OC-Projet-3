@@ -5,6 +5,7 @@
 This repository contains the source code that I use for my N°3 project presentation. It consiste of a little maze where u must confronte the guardian after collecting three objects to assemble a syringe.
 
 Requirements
+
 To install and run this game, you need:
 
 Python 3.6+
