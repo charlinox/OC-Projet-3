@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-from pygame.locals import *
+from pygame import *
 
 
 class Character:

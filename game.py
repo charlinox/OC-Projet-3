@@ -2,15 +2,14 @@
 # coding: utf-8
 
 import pygame
-from pygame.locals import *
+from pygame import *
 
 from graphic_level import GraphicLevel
 from inputs import inputs
 
 
 class Game:
-    """ Class redefines the display() method based
-    on the inheritance of the Level class """
+    """ class integrating the initialization and the main frames of the game """
 
     def __init__(self, level_path):
         pygame.init()
