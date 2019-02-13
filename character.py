@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-from pygame import *
-
 
 class Character:
     """  Class of the character who can move and fight  """
@@ -14,10 +12,10 @@ class Character:
     def move(self, movement):
         """  Moving the character  """
         actions = {
-            K_RIGHT: lambda: (self.pos_x, self.pos_y + 1),
-            K_LEFT: lambda: (self.pos_x, self.pos_y - 1),
-            K_UP: lambda: (self.pos_x - 1, self.pos_y),
-            K_DOWN: lambda: (self.pos_x + 1, self.pos_y),
+            pg.K_RIGHT: lambda: (self.pos_x, self.pos_y + 1),
+            pg.K_LEFT: lambda: (self.pos_x, self.pos_y - 1),
+            pg.K_UP: lambda: (self.pos_x - 1, self.pos_y),
+            pg.K_DOWN: lambda: (self.pos_x + 1, self.pos_y),
         }
         pos_x, pos_y = actions[movement]()
 
