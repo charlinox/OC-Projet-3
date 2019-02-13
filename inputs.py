@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-import pygame
-from pygame import *
+import pygame as pg
 
 
 def inputs():
     """  Class handling keyboard and mouse inputs  """
 
-    pygame.time.Clock().tick(30)
-    for event in pygame.event.get():
-        if event.type == QUIT or event.type == KEYDOWN and event.key in list(
-                (K_ESCAPE, K_c)):
+    pg.time.Clock().tick(30)
+    for event in pg.event.get():
+        if event.type == pg.QUIT or event.type == pg.KEYDOWN and event.key in list(
+                (pg.K_ESCAPE, pg.K_c)):
             return "end"
-        elif event.type == KEYDOWN:
+        elif event.type == pg.KEYDOWN:
             return event.key
