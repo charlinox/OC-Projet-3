@@ -19,7 +19,7 @@ class Items:
 
     def put(self, level):
         """ Creation of a set containing the coordinates of the
-        three tools to picpg.K_UP.
+        three tools to pick_up.
         """
 
         self.location_tools = set(

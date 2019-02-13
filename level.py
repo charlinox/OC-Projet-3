@@ -23,7 +23,7 @@ class Level:
 
             for i, ligne in enumerate(f):
                 for j, col in enumerate(ligne):
-                    if col == ' ':
+                    if col == '0':
                         self.passages.add((i, j))
                     elif col == 'd':
                         self.start.add((i, j))

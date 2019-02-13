@@ -8,7 +8,7 @@ pylint = "*"
 flake8 = "*"
 
 [packages]
-pg = "*"
+pygame = "*"
 autopep8 = "*"
 
 [requires]
