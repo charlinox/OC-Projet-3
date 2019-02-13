@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-import pygame
+import pygame as pg
 
 from level import Level
 
@@ -17,20 +17,20 @@ class GraphicLevel(Level):
         """  Method specifically redefined to display the maze graphically """
 
         """  Initializing and loading pictures  """
-        windows = pygame.display.get_surface()
-        picture_background = pygame.image.load(
+        windows = pg.display.get_surface()
+        picture_background = pg.image.load(
             "images/background.jpg").convert()
         windows.blit(picture_background, (0, 0))
         """  Loading sprites  """
-        pic_mac_gyver = pygame.image.load(
+        pic_mac_gyver = pg.image.load(
             "images/mac_gyver.png").convert_alpha()
-        pic_gardian = pygame.image.load("images/gardian.png").convert_alpha()
-        pic_wall = pygame.image.load("images/wall.png").convert()
-        pic_ether = pygame.image.load("images/ether.png").convert()
-        pic_tube = pygame.image.load("images/tube.png").convert()
-        pic_niddle = pygame.image.load("images/niddle2.png").convert_alpha()
-        pic_syringe = pygame.image.load("images/syringe.png").convert()
-        mask_wall = pygame.image.load("images/mask_wall2.jpg").convert()
+        pic_gardian = pg.image.load("images/gardian.png").convert_alpha()
+        pic_wall = pg.image.load("images/wall.png").convert()
+        pic_ether = pg.image.load("images/ether.png").convert()
+        pic_tube = pg.image.load("images/tube.png").convert()
+        pic_niddle = pg.image.load("images/niddle2.png").convert_alpha()
+        pic_syringe = pg.image.load("images/syringe.png").convert()
+        mask_wall = pg.image.load("images/mask_wall2.jpg").convert()
         pic_tube.set_colorkey((255, 255, 255))
         pic_syringe.set_colorkey((255, 255, 255))
         pic_ether.set_colorkey((1, 1, 1))

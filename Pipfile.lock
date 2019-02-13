@@ -30,7 +30,7 @@
             ],
             "version": "==2.4.0"
         },
-        "pygame": {
+        "pg": {
             "hashes": [
                 "sha256:06dc92ccfea33b85f209db3d49f99a2a30c88fe9fb80fa2564cee443ece787b5",
                 "sha256:0919a2ec5fcb0d00518c2a5fa99858ccf22d7fbcc0e12818b317062d11386984",
